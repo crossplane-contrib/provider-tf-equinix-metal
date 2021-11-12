@@ -1,14 +1,14 @@
 # ====================================================================================
 # Setup Project
 
-PROJECT_NAME := provider-tf-template
+PROJECT_NAME := provider-tf-equinixmetal
 PROJECT_REPO := github.com/crossplane-contrib/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.0.5
-export TERRAFORM_PROVIDER_SOURCE :=
-export TERRAFORM_PROVIDER_VERSION :=
-export TERRAFORM_PROVIDER_DOWNLOAD_NAME :=
-export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX :=
+export TERRAFORM_PROVIDER_SOURCE := equinix/metal
+export TERRAFORM_PROVIDER_VERSION := 3.2.0
+export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-metal
+export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/equinix/terraform-provider-metal/releases/download/v3.2.0/
 
 PLATFORMS ?= linux_amd64 linux_arm64
 
@@ -50,7 +50,7 @@ GO111MODULE = on
 # Setup Images
 
 DOCKER_REGISTRY := crossplane
-IMAGES = provider-tf-template provider-tf-template-controller
+IMAGES = provider-tf-equinixmetal provider-tf-equinixmetal-controller
 -include build/makelib/image.mk
 
 # ====================================================================================
