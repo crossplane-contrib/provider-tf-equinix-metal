@@ -31,8 +31,7 @@ func GetProvider() *tjconfig.Provider {
 	pc := tjconfig.NewProvider(resourceMap, resourcePrefix, modulePath,
 		tjconfig.WithDefaultResourceFn(defaultResourceFn),
 		tjconfig.WithIncludeList([]string{
-			"metal_device$",
-			"metal_project$",
+			".*",
 		}))
 
 	for _, configure := range []func(provider *tjconfig.Provider){
