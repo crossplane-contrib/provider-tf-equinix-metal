@@ -22,17 +22,37 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
+	v1alpha1bgp "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/bgp/v1alpha1"
 	v1alpha1device "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/device/v1alpha1"
+	v1alpha1ip "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/ip/v1alpha1"
+	v1alpha1metal "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/metal/v1alpha1"
+	v1alpha1port "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/port/v1alpha1"
 	v1alpha1project "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/project/v1alpha1"
+	v1alpha1reserved "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/reserved/v1alpha1"
+	v1alpha1spot "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/spot/v1alpha1"
+	v1alpha1ssh "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/ssh/v1alpha1"
+	v1alpha1user "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/user/v1alpha1"
 	v1alpha1 "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/v1alpha1"
+	v1alpha1virtual "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/virtual/v1alpha1"
+	v1alpha1volume "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/volume/v1alpha1"
 )
 
 func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1bgp.SchemeBuilder.AddToScheme,
 		v1alpha1device.SchemeBuilder.AddToScheme,
+		v1alpha1ip.SchemeBuilder.AddToScheme,
+		v1alpha1metal.SchemeBuilder.AddToScheme,
+		v1alpha1port.SchemeBuilder.AddToScheme,
 		v1alpha1project.SchemeBuilder.AddToScheme,
+		v1alpha1reserved.SchemeBuilder.AddToScheme,
+		v1alpha1spot.SchemeBuilder.AddToScheme,
+		v1alpha1ssh.SchemeBuilder.AddToScheme,
+		v1alpha1user.SchemeBuilder.AddToScheme,
+		v1alpha1virtual.SchemeBuilder.AddToScheme,
+		v1alpha1volume.SchemeBuilder.AddToScheme,
 	)
 }
 
