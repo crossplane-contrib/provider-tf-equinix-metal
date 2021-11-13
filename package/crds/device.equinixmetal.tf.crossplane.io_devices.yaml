@@ -154,6 +154,29 @@ spec:
                   projectId:
                     description: The ID of the project in which to create the device
                     type: string
+                  projectIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  projectIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
                   projectSshKeyIds:
                     description: Array of IDs of the project SSH keys which should
                       be added to the device. If you omit this, SSH keys of all the
@@ -222,7 +245,6 @@ spec:
                 required:
                 - operatingSystem
                 - plan
-                - projectId
                 type: object
               providerConfigRef:
                 default:
