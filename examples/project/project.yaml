@@ -1,0 +1,10 @@
+apiVersion: project.equinixmetal.tf.crossplane.io/v1alpha1
+kind: Project
+metadata:
+ name: hello-crossplane
+spec:
+ forProvider:
+   description: "Managed with Crossplane Equinix Metal Provider (generated with Terrajet)"
+   name: terraject-example-project
+ providerConfigRef:
+   name: default

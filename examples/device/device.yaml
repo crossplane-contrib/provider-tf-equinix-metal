@@ -1,0 +1,20 @@
+apiVersion: device.equinixmetal.tf.crossplane.io/v1alpha1
+kind: Device
+spec:
+  forProvider:
+    projectIdRef:
+      name: hello-crossplane
+    hostname: terrajet-example
+    plan: c3.small.x86
+    operatingSystem: ubuntu_20_04
+    billingCycle: hourly
+    locked: false
+    networkType: hybrid
+    tags:
+    - crossplane
+  providerConfigRef:
+    name: default
+  writeConnectionSecretToRef:
+    name: terrajet-example
+    namespace: crossplane-system
+  reclaimPolicy: Delete
