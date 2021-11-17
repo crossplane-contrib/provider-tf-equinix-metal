@@ -62,6 +62,10 @@ type ProjectParameters struct {
 	// +kubebuilder:validation:Optional
 	BgpConfig []BgpConfigParameters `json:"bgpConfig,omitempty" tf:"bgp_config,omitempty"`
 
+	// The name of the project
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
 	// The UUID of organization under which you want to create the project. If you leave it out, the project will be create under your the default organization of your account
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`

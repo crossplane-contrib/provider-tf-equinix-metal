@@ -103,6 +103,9 @@ spec:
                       - deploymentType
                       type: object
                     type: array
+                  name:
+                    description: The name of the project
+                    type: string
                   organizationId:
                     description: The UUID of organization under which you want to
                       create the project. If you leave it out, the project will be
@@ -113,6 +116,8 @@ spec:
                       payment method and the project need to belong to the same organization
                       (passed with organization_id, or default)
                     type: string
+                required:
+                - name
                 type: object
               providerConfigRef:
                 default:

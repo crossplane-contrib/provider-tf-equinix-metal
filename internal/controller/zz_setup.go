@@ -36,14 +36,14 @@ import (
 	vlan "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/metal/vlan"
 	volume "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/metal/volume"
 	vlanattachment "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/port/vlanattachment"
-	apikeyproject "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/project/apikey"
+	apikey "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/project/apikey"
 	project "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/project/project"
 	sshkey "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/project/sshkey"
 	providerconfig "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/providerconfig"
 	ipblock "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/reserved/ipblock"
 	marketrequest "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/spot/marketrequest"
 	key "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/ssh/key"
-	apikey "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/user/apikey"
+	apikeyuser "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/user/apikey"
 	circuit "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/virtual/circuit"
 	attachment "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/volume/attachment"
 )
@@ -53,7 +53,7 @@ import (
 func Setup(mgr ctrl.Manager, l logging.Logger, wl workqueue.RateLimiter, ps terraform.SetupFn, ws *terraform.WorkspaceStore, cfg *tjconfig.Provider, concurrency int) error {
 	for _, setup := range []func(ctrl.Manager, logging.Logger, workqueue.RateLimiter, terraform.SetupFn, *terraform.WorkspaceStore, *tjconfig.Provider, int) error{
 		apikey.Setup,
-		apikeyproject.Setup,
+		apikeyuser.Setup,
 		attachment.Setup,
 		attachmentip.Setup,
 		circuit.Setup,
