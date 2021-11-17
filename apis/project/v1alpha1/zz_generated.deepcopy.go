@@ -312,6 +312,11 @@ func (in *ProjectParameters) DeepCopyInto(out *ProjectParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.OrganizationID != nil {
 		in, out := &in.OrganizationID, &out.OrganizationID
 		*out = new(string)
