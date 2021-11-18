@@ -67,8 +67,15 @@ type ProjectParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The UUID of organization under which you want to create the project. If you leave it out, the project will be create under your the default organization of your account
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-tf-equinixmetal/apis/metal/v1alpha1.Organization
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	OrganizationIDRef *v1.Reference `json:"organizationIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	OrganizationIDSelector *v1.Selector `json:"organizationIdSelector,omitempty" tf:"-"`
 
 	// The UUID of payment method for this project. The payment method and the project need to belong to the same organization (passed with organization_id, or default)
 	// +kubebuilder:validation:Optional

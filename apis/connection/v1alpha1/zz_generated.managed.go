@@ -19,58 +19,58 @@ package v1alpha1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
-// GetCondition of this Attachment.
-func (mg *Attachment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this Connection.
+func (mg *Connection) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this Attachment.
-func (mg *Attachment) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this Connection.
+func (mg *Connection) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetProviderConfigReference of this Attachment.
-func (mg *Attachment) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this Connection.
+func (mg *Connection) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 /*
-GetProviderReference of this Attachment.
+GetProviderReference of this Connection.
 Deprecated: Use GetProviderConfigReference.
 */
-func (mg *Attachment) GetProviderReference() *xpv1.Reference {
+func (mg *Connection) GetProviderReference() *xpv1.Reference {
 	return mg.Spec.ProviderReference
 }
 
-// GetWriteConnectionSecretToReference of this Attachment.
-func (mg *Attachment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this Connection.
+func (mg *Connection) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this Attachment.
-func (mg *Attachment) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this Connection.
+func (mg *Connection) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this Attachment.
-func (mg *Attachment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this Connection.
+func (mg *Connection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetProviderConfigReference of this Attachment.
-func (mg *Attachment) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this Connection.
+func (mg *Connection) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 /*
-SetProviderReference of this Attachment.
+SetProviderReference of this Connection.
 Deprecated: Use SetProviderConfigReference.
 */
-func (mg *Attachment) SetProviderReference(r *xpv1.Reference) {
+func (mg *Connection) SetProviderReference(r *xpv1.Reference) {
 	mg.Spec.ProviderReference = r
 }
 
-// SetWriteConnectionSecretToReference of this Attachment.
-func (mg *Attachment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this Connection.
+func (mg *Connection) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

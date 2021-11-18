@@ -34,7 +34,7 @@ import (
 	tjcontroller "github.com/crossplane-contrib/terrajet/pkg/controller"
 	"github.com/crossplane-contrib/terrajet/pkg/terraform"
 
-	v1alpha1 "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/metal/v1alpha1"
+	v1alpha1 "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/connection/v1alpha1"
 )
 
 // Setup adds a controller that reconciles Connection managed resources.
@@ -47,6 +47,7 @@ func Setup(mgr ctrl.Manager, l logging.Logger, rl workqueue.RateLimiter, s terra
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
 		managed.WithFinalizer(terraform.NewWorkspaceFinalizer(ws, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))),
 		managed.WithTimeout(3*time.Minute),
+		managed.WithInitializers(),
 	)
 
 	return ctrl.NewControllerManagedBy(mgr).

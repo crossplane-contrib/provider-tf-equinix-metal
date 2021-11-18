@@ -37,6 +37,10 @@ type SshKeyObservation struct {
 
 type SshKeyParameters struct {
 
+	// The name of the SSH key for identification
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
 	// The ID of parent project
 	// +kubebuilder:validation:Required
 	ProjectID *string `json:"projectId" tf:"project_id,omitempty"`

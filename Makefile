@@ -80,8 +80,8 @@ crds.clean:
 	@find package/crds -name '*.yaml.sed' -delete || $(FAIL)
 	@$(OK) cleaned generated CRDs
 
-terrajet.run:
-	@go run cmd/generator/main.go
+terrajet.run: $(GOIMPORTS)
+	@PATH=$(TOOLS_HOST_DIR)/:${PATH} go run cmd/generator/main.go
 
 generate.init: terrajet.run
 generate.done: crds.clean

@@ -45,7 +45,7 @@ RUN curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.1.21.zip"
 
 # ------------------------------------------------------------------------------------------------
 # Go support
-RUN GO_VERSION=1.16.1 && \
+RUN GO_VERSION=1.17.2 && \
     GO_HASH=3edc22f8332231c3ba8be246f184b736b8d28f06ce24f08168d8ecf052549769 && \
     curl -fsSL https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz -o golang.tar.gz && \
     echo "${GO_HASH}  golang.tar.gz" | sha256sum -c - && \

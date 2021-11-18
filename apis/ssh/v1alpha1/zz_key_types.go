@@ -37,6 +37,10 @@ type KeyObservation struct {
 
 type KeyParameters struct {
 
+	// The name of the SSH key for identification
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
 	// The public key. If this is a file, it
 	// +kubebuilder:validation:Required
 	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`

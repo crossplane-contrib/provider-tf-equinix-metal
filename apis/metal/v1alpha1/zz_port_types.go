@@ -34,6 +34,8 @@ type PortObservation struct {
 
 	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
 
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`

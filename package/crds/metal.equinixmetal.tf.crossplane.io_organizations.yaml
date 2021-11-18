@@ -68,12 +68,17 @@ spec:
                   logo:
                     description: Logo URL
                     type: string
+                  name:
+                    description: The name of the Organization
+                    type: string
                   twitter:
                     description: Twitter handle
                     type: string
                   website:
                     description: Website link
                     type: string
+                required:
+                - name
                 type: object
               providerConfigRef:
                 default:

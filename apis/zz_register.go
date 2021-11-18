@@ -23,6 +23,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 
 	v1alpha1bgp "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/bgp/v1alpha1"
+	v1alpha1connection "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/connection/v1alpha1"
 	v1alpha1device "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/device/v1alpha1"
 	v1alpha1ip "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/ip/v1alpha1"
 	v1alpha1metal "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/metal/v1alpha1"
@@ -34,7 +35,6 @@ import (
 	v1alpha1user "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/user/v1alpha1"
 	v1alpha1 "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/v1alpha1"
 	v1alpha1virtual "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/virtual/v1alpha1"
-	v1alpha1volume "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/volume/v1alpha1"
 )
 
 func init() {
@@ -42,6 +42,7 @@ func init() {
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha1bgp.SchemeBuilder.AddToScheme,
+		v1alpha1connection.SchemeBuilder.AddToScheme,
 		v1alpha1device.SchemeBuilder.AddToScheme,
 		v1alpha1ip.SchemeBuilder.AddToScheme,
 		v1alpha1metal.SchemeBuilder.AddToScheme,
@@ -52,7 +53,6 @@ func init() {
 		v1alpha1ssh.SchemeBuilder.AddToScheme,
 		v1alpha1user.SchemeBuilder.AddToScheme,
 		v1alpha1virtual.SchemeBuilder.AddToScheme,
-		v1alpha1volume.SchemeBuilder.AddToScheme,
 	)
 }
 
