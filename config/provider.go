@@ -5,14 +5,14 @@ import (
 	tf "github.com/equinix/terraform-provider-metal/metal"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/crossplane-contrib/provider-tf-equinixmetal/config/connection"
-	"github.com/crossplane-contrib/provider-tf-equinixmetal/config/device"
-	"github.com/crossplane-contrib/provider-tf-equinixmetal/config/project"
+	"github.com/crossplane-contrib/provider-tf-equinix-metal/config/connection"
+	"github.com/crossplane-contrib/provider-tf-equinix-metal/config/device"
+	"github.com/crossplane-contrib/provider-tf-equinix-metal/config/project"
 )
 
 const (
 	resourcePrefix = "equinixmetal"
-	modulePath     = "github.com/crossplane-contrib/provider-tf-equinixmetal"
+	modulePath     = "github.com/crossplane-contrib/provider-tf-equinix-metal"
 )
 
 // GetProvider returns provider configuration

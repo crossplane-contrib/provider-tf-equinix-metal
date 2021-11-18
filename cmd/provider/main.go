@@ -27,10 +27,10 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	"github.com/crossplane-contrib/provider-tf-equinixmetal/apis"
-	pconfig "github.com/crossplane-contrib/provider-tf-equinixmetal/config"
-	"github.com/crossplane-contrib/provider-tf-equinixmetal/internal/clients"
-	"github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller"
+	"github.com/crossplane-contrib/provider-tf-equinix-metal/apis"
+	pconfig "github.com/crossplane-contrib/provider-tf-equinix-metal/config"
+	"github.com/crossplane-contrib/provider-tf-equinix-metal/internal/clients"
+	"github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller"
 )
 
 func main() {
@@ -46,7 +46,7 @@ func main() {
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 
 	zl := zap.New(zap.UseDevMode(*debug))
-	log := logging.NewLogrLogger(zl.WithName("provider-tf-equinixmetal"))
+	log := logging.NewLogrLogger(zl.WithName("provider-tf-equinix-metal"))
 	if *debug {
 		// The controller-runtime runs with a no-op logger by default. It is
 		// *very* verbose even at info level, so we only provide it a real
@@ -61,7 +61,7 @@ func main() {
 
 	mgr, err := ctrl.NewManager(cfg, ctrl.Options{
 		LeaderElection:   *leaderElection,
-		LeaderElectionID: "crossplane-leader-election-provider-tf-equinixmetal",
+		LeaderElectionID: "crossplane-leader-election-provider-tf-equinix-metal",
 		SyncPeriod:       syncPeriod,
 	})
 	kingpin.FatalIfError(err, "Cannot create controller manager")

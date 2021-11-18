@@ -22,19 +22,19 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1bgp "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/bgp/v1alpha1"
-	v1alpha1connection "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/connection/v1alpha1"
-	v1alpha1device "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/device/v1alpha1"
-	v1alpha1ip "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/ip/v1alpha1"
-	v1alpha1metal "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/metal/v1alpha1"
-	v1alpha1port "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/port/v1alpha1"
-	v1alpha1project "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/project/v1alpha1"
-	v1alpha1reserved "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/reserved/v1alpha1"
-	v1alpha1spot "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/spot/v1alpha1"
-	v1alpha1ssh "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/ssh/v1alpha1"
-	v1alpha1user "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/user/v1alpha1"
-	v1alpha1 "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/v1alpha1"
-	v1alpha1virtual "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/virtual/v1alpha1"
+	v1alpha1bgp "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/bgp/v1alpha1"
+	v1alpha1connection "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/connection/v1alpha1"
+	v1alpha1device "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/device/v1alpha1"
+	v1alpha1ip "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/ip/v1alpha1"
+	v1alpha1metal "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/metal/v1alpha1"
+	v1alpha1port "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/port/v1alpha1"
+	v1alpha1project "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/project/v1alpha1"
+	v1alpha1reserved "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/reserved/v1alpha1"
+	v1alpha1spot "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/spot/v1alpha1"
+	v1alpha1ssh "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/ssh/v1alpha1"
+	v1alpha1user "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/user/v1alpha1"
+	v1alpha1 "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/v1alpha1"
+	v1alpha1virtual "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/virtual/v1alpha1"
 )
 
 func init() {

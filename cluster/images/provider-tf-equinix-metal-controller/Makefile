@@ -6,7 +6,7 @@ include ../../../build/makelib/common.mk
 
 # ====================================================================================
 #  Options
-IMAGE = $(BUILD_REGISTRY)/provider-tf-equinixmetal-controller-$(ARCH)
+IMAGE = $(BUILD_REGISTRY)/provider-tf-equinix-metal-controller-$(ARCH)
 include ../../../build/makelib/image.mk
 
 # ====================================================================================

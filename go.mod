@@ -1,4 +1,4 @@
-module github.com/crossplane-contrib/provider-tf-equinixmetal
+module github.com/crossplane-contrib/provider-tf-equinix-metal
 
 go 1.17
 

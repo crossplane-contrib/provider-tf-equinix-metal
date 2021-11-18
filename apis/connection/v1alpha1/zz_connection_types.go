@@ -58,7 +58,7 @@ type ConnectionParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// ID of the organization responsible for the connection
-	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-tf-equinixmetal/apis/metal/v1alpha1.Organization
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-tf-equinix-metal/apis/metal/v1alpha1.Organization
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
@@ -69,7 +69,7 @@ type ConnectionParameters struct {
 	OrganizationIDSelector *v1.Selector `json:"organizationIdSelector,omitempty" tf:"-"`
 
 	// ID of the project where the connection is scoped to, only used for type == "shared"
-	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-tf-equinixmetal/apis/project/v1alpha1.Project
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-tf-equinix-metal/apis/project/v1alpha1.Project
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 

@@ -34,7 +34,7 @@ import (
 	tjcontroller "github.com/crossplane-contrib/terrajet/pkg/controller"
 	"github.com/crossplane-contrib/terrajet/pkg/terraform"
 
-	v1alpha1 "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/device/v1alpha1"
+	v1alpha1 "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/device/v1alpha1"
 )
 
 // Setup adds a controller that reconciles NetworkType managed resources.
