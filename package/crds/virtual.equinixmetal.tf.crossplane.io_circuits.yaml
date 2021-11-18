@@ -68,6 +68,9 @@ spec:
                   description:
                     description: Description of the Virtual Circuit resource
                     type: string
+                  name:
+                    description: Name of the Virtual Circuit resource
+                    type: string
                   nniVlan:
                     description: Equinix Metal network-to-network VLAN ID (optional
                       when the connection has mode=tunnel)

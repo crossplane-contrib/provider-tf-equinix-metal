@@ -53,13 +53,31 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// ID of the organization responsible for the connection
+	// Name of the connection resource
 	// +kubebuilder:validation:Required
-	OrganizationID *string `json:"organizationId" tf:"organization_id,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// ID of the organization responsible for the connection
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-tf-equinixmetal/apis/metal/v1alpha1.Organization
+	// +kubebuilder:validation:Optional
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	OrganizationIDRef *v1.Reference `json:"organizationIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	OrganizationIDSelector *v1.Selector `json:"organizationIdSelector,omitempty" tf:"-"`
 
 	// ID of the project where the connection is scoped to, only used for type == "shared"
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-tf-equinixmetal/apis/project/v1alpha1.Project
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ProjectIDRef *v1.Reference `json:"projectIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
 	// Connection redundancy - redundant or primary
 	// +kubebuilder:validation:Required

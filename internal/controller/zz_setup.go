@@ -26,15 +26,14 @@ import (
 	"github.com/crossplane-contrib/terrajet/pkg/terraform"
 
 	session "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/bgp/session"
+	connection "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/connection/connection"
 	device "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/device/device"
 	networktype "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/device/networktype"
-	attachmentip "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/ip/attachment"
-	connection "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/metal/connection"
+	attachment "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/ip/attachment"
 	gateway "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/metal/gateway"
 	organization "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/metal/organization"
 	port "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/metal/port"
 	vlan "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/metal/vlan"
-	volume "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/metal/volume"
 	vlanattachment "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/port/vlanattachment"
 	apikeyproject "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/project/apikey"
 	project "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/project/project"
@@ -45,7 +44,6 @@ import (
 	key "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/ssh/key"
 	apikey "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/user/apikey"
 	circuit "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/virtual/circuit"
-	attachment "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/volume/attachment"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -55,7 +53,6 @@ func Setup(mgr ctrl.Manager, l logging.Logger, wl workqueue.RateLimiter, ps terr
 		apikey.Setup,
 		apikeyproject.Setup,
 		attachment.Setup,
-		attachmentip.Setup,
 		circuit.Setup,
 		connection.Setup,
 		device.Setup,
@@ -72,7 +69,6 @@ func Setup(mgr ctrl.Manager, l logging.Logger, wl workqueue.RateLimiter, ps terr
 		sshkey.Setup,
 		vlan.Setup,
 		vlanattachment.Setup,
-		volume.Setup,
 	} {
 		if err := setup(mgr, l, wl, ps, ws, cfg, concurrency); err != nil {
 			return err

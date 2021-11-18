@@ -153,6 +153,8 @@ spec:
                     type: boolean
                   mac:
                     type: string
+                  name:
+                    type: string
                   networkType:
                     type: string
                   type:

@@ -43,6 +43,10 @@ type CircuitParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Name of the Virtual Circuit resource
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Equinix Metal network-to-network VLAN ID (optional when the connection has mode=tunnel)
 	// +kubebuilder:validation:Optional
 	NniVlan *int64 `json:"nniVlan,omitempty" tf:"nni_vlan,omitempty"`

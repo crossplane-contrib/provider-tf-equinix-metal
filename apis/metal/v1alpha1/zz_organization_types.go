@@ -41,6 +41,10 @@ type OrganizationParameters struct {
 	// +kubebuilder:validation:Optional
 	Logo *string `json:"logo,omitempty" tf:"logo,omitempty"`
 
+	// The name of the Organization
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
 	// Twitter handle
 	// +kubebuilder:validation:Optional
 	Twitter *string `json:"twitter,omitempty" tf:"twitter,omitempty"`

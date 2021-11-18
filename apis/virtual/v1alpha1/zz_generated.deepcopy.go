@@ -126,6 +126,11 @@ func (in *CircuitParameters) DeepCopyInto(out *CircuitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.NniVlan != nil {
 		in, out := &in.NniVlan, &out.NniVlan
 		*out = new(int64)
