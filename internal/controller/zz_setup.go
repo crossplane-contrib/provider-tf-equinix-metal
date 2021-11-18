@@ -25,25 +25,25 @@ import (
 	tjconfig "github.com/crossplane-contrib/terrajet/pkg/config"
 	"github.com/crossplane-contrib/terrajet/pkg/terraform"
 
-	session "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/bgp/session"
-	connection "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/connection/connection"
-	device "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/device/device"
-	networktype "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/device/networktype"
-	attachment "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/ip/attachment"
-	gateway "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/metal/gateway"
-	organization "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/metal/organization"
-	port "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/metal/port"
-	vlan "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/metal/vlan"
-	vlanattachment "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/port/vlanattachment"
-	apikey "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/project/apikey"
-	project "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/project/project"
-	sshkey "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/project/sshkey"
-	providerconfig "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/providerconfig"
-	ipblock "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/reserved/ipblock"
-	marketrequest "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/spot/marketrequest"
-	key "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/ssh/key"
-	apikeyuser "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/user/apikey"
-	circuit "github.com/crossplane-contrib/provider-tf-equinixmetal/internal/controller/virtual/circuit"
+	session "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/bgp/session"
+	connection "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/connection/connection"
+	device "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/device/device"
+	networktype "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/device/networktype"
+	attachment "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/ip/attachment"
+	gateway "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/metal/gateway"
+	organization "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/metal/organization"
+	port "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/metal/port"
+	vlan "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/metal/vlan"
+	vlanattachment "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/port/vlanattachment"
+	apikeyproject "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/project/apikey"
+	project "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/project/project"
+	sshkey "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/project/sshkey"
+	providerconfig "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/providerconfig"
+	ipblock "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/reserved/ipblock"
+	marketrequest "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/spot/marketrequest"
+	key "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/ssh/key"
+	apikey "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/user/apikey"
+	circuit "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/virtual/circuit"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -51,7 +51,7 @@ import (
 func Setup(mgr ctrl.Manager, l logging.Logger, wl workqueue.RateLimiter, ps terraform.SetupFn, ws *terraform.WorkspaceStore, cfg *tjconfig.Provider, concurrency int) error {
 	for _, setup := range []func(ctrl.Manager, logging.Logger, workqueue.RateLimiter, terraform.SetupFn, *terraform.WorkspaceStore, *tjconfig.Provider, int) error{
 		apikey.Setup,
-		apikeyuser.Setup,
+		apikeyproject.Setup,
 		attachment.Setup,
 		circuit.Setup,
 		connection.Setup,

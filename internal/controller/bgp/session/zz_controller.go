@@ -34,7 +34,7 @@ import (
 	tjcontroller "github.com/crossplane-contrib/terrajet/pkg/controller"
 	"github.com/crossplane-contrib/terrajet/pkg/terraform"
 
-	v1alpha1 "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/bgp/v1alpha1"
+	v1alpha1 "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/bgp/v1alpha1"
 )
 
 // Setup adds a controller that reconciles Session managed resources.

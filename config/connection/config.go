@@ -8,11 +8,11 @@ func Customize(p *config.Provider) {
 		r.Group = "connection"
 
 		r.References["organization_id"] = config.Reference{
-			Type: "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/metal/v1alpha1.Organization",
+			Type: "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/metal/v1alpha1.Organization",
 		}
 
 		r.References["project_id"] = config.Reference{
-			Type: "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/project/v1alpha1.Project",
+			Type: "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/project/v1alpha1.Project",
 		}
 	})
 }

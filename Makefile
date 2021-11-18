@@ -1,7 +1,7 @@
 # ====================================================================================
 # Setup Project
 
-PROJECT_NAME := provider-tf-equinixmetal
+PROJECT_NAME := provider-tf-equinix-metal
 PROJECT_REPO := github.com/crossplane-contrib/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.0.5
@@ -50,7 +50,7 @@ GO111MODULE = on
 # Setup Images
 
 DOCKER_REGISTRY := crossplane
-IMAGES = provider-tf-equinixmetal provider-tf-equinixmetal-controller
+IMAGES = provider-tf-equinix-metal provider-tf-equinix-metal-controller
 -include build/makelib/image.mk
 
 # ====================================================================================

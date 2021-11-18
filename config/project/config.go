@@ -7,7 +7,7 @@ func Customize(p *config.Provider) {
 	p.AddResourceConfigurator("metal_project", func(r *config.Resource) {
 		r.Group = "project"
 		r.References["organization_id"] = config.Reference{
-			Type: "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/metal/v1alpha1.Organization",
+			Type: "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/metal/v1alpha1.Organization",
 		}
 	})
 }

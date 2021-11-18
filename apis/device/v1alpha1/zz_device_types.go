@@ -108,7 +108,7 @@ type DeviceParameters struct {
 	Plan *string `json:"plan" tf:"plan,omitempty"`
 
 	// The ID of the project in which to create the device
-	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-tf-equinixmetal/apis/project/v1alpha1.Project
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-tf-equinix-metal/apis/project/v1alpha1.Project
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 

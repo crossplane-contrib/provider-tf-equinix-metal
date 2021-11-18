@@ -34,7 +34,7 @@ import (
 	tjcontroller "github.com/crossplane-contrib/terrajet/pkg/controller"
 	"github.com/crossplane-contrib/terrajet/pkg/terraform"
 
-	v1alpha1 "github.com/crossplane-contrib/provider-tf-equinixmetal/apis/project/v1alpha1"
+	v1alpha1 "github.com/crossplane-contrib/provider-tf-equinix-metal/apis/project/v1alpha1"
 )
 
 // Setup adds a controller that reconciles SshKey managed resources.
