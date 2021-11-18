@@ -5,6 +5,7 @@ import (
 	tf "github.com/equinix/terraform-provider-metal/metal"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
+	"github.com/crossplane-contrib/provider-tf-equinixmetal/config/connection"
 	"github.com/crossplane-contrib/provider-tf-equinixmetal/config/device"
 	"github.com/crossplane-contrib/provider-tf-equinixmetal/config/project"
 )
@@ -24,7 +25,8 @@ func GetProvider() *tjconfig.Provider {
 	defaultResourceFn := func(name string, terraformResource *schema.Resource) *tjconfig.Resource {
 		r := tjconfig.DefaultResource(name, terraformResource)
 		// Add any provider-specific defaulting here. For example:
-		//   r.ExternalName = tjconfig.IdentifierFromProvider
+		r.ExternalName = tjconfig.IdentifierFromProvider
+
 		return r
 	}
 
@@ -32,12 +34,17 @@ func GetProvider() *tjconfig.Provider {
 		tjconfig.WithDefaultResourceFn(defaultResourceFn),
 		tjconfig.WithIncludeList([]string{
 			".*",
-		}))
+		}),
+		tjconfig.WithSkipList([]string{
+			"volume",
+		}),
+	)
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
 		device.Customize,
 		project.Customize,
+		connection.Customize,
 	} {
 		configure(pc)
 	}
