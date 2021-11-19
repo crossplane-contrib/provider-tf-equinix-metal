@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: vlanattachments.port.equinixmetal.tf.crossplane.io
+  name: keys.ssh.equinixmetal.jet.crossplane.io
 spec:
-  group: port.equinixmetal.tf.crossplane.io
+  group: ssh.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: VlanAttachment
-    listKind: VlanAttachmentList
-    plural: vlanattachments
-    singular: vlanattachment
+    - equinixmetaljet
+    kind: Key
+    listKind: KeyList
+    plural: keys
+    singular: key
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: VlanAttachment is the Schema for the VlanAttachments API
+        description: Key is the Schema for the Keys API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: VlanAttachmentSpec defines the desired state of VlanAttachment
+            description: KeySpec defines the desired state of Key
             properties:
               deletionPolicy:
                 default: Delete
@@ -62,31 +62,15 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  deviceId:
-                    description: ID of device to be assigned to the VLAN
+                  name:
+                    description: The name of the SSH key for identification
                     type: string
-                  forceBond:
-                    description: Add port back to the bond when this resource is removed.
-                      Default is false
-                    type: boolean
-                  native:
-                    description: Mark this VLAN a native VLAN on the port. This can
-                      be used only if this assignment assigns second or further VLAN
-                      to the port. To ensure that this attachment is not first on
-                      a port, you can use depends_on pointing to another metal_port_vlan_attachment,
-                      just like in the layer2-individual example above
-                    type: boolean
-                  portName:
-                    description: Name of network port to be assigned to the VLAN
+                  publicKey:
+                    description: The public key. If this is a file, it
                     type: string
-                  vlanVnid:
-                    description: VXLAN Network Identifier, integer
-                    format: int64
-                    type: integer
                 required:
-                - deviceId
-                - portName
-                - vlanVnid
+                - name
+                - publicKey
                 type: object
               providerConfigRef:
                 default:
@@ -133,13 +117,17 @@ spec:
             - forProvider
             type: object
           status:
-            description: VlanAttachmentStatus defines the observed state of VlanAttachment.
+            description: KeyStatus defines the observed state of Key.
             properties:
               atProvider:
                 properties:
-                  portId:
+                  created:
                     type: string
-                  vlanId:
+                  fingerprint:
+                    type: string
+                  ownerId:
+                    type: string
+                  updated:
                     type: string
                 type: object
               conditions:

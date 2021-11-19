@@ -30,11 +30,6 @@ func (mg *Session) GetTerraformResourceType() string {
 	return "metal_bgp_session"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this Session
-func (tr *Session) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this Session
 func (tr *Session) GetConnectionDetailsMapping() map[string]string {
 	return nil

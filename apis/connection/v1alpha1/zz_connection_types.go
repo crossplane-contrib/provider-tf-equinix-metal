@@ -131,7 +131,7 @@ type ConnectionStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type Connection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -150,10 +150,10 @@ type ConnectionList struct {
 
 // Repository type metadata.
 var (
-	ConnectionKind             = "Connection"
-	ConnectionGroupKind        = schema.GroupKind{Group: Group, Kind: ConnectionKind}.String()
-	ConnectionKindAPIVersion   = ConnectionKind + "." + GroupVersion.String()
-	ConnectionGroupVersionKind = GroupVersion.WithKind(ConnectionKind)
+	Connection_Kind             = "Connection"
+	Connection_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Connection_Kind}.String()
+	Connection_KindAPIVersion   = Connection_Kind + "." + CRDGroupVersion.String()
+	Connection_GroupVersionKind = CRDGroupVersion.WithKind(Connection_Kind)
 )
 
 func init() {

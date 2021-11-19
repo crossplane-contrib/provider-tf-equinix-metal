@@ -30,11 +30,6 @@ func (mg *MarketRequest) GetTerraformResourceType() string {
 	return "metal_spot_market_request"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this MarketRequest
-func (tr *MarketRequest) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this MarketRequest
 func (tr *MarketRequest) GetConnectionDetailsMapping() map[string]string {
 	return nil

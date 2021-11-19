@@ -30,11 +30,6 @@ func (mg *IpBlock) GetTerraformResourceType() string {
 	return "metal_reserved_ip_block"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this IpBlock
-func (tr *IpBlock) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this IpBlock
 func (tr *IpBlock) GetConnectionDetailsMapping() map[string]string {
 	return nil

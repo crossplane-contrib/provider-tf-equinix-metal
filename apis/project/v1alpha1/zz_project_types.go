@@ -43,7 +43,7 @@ type BgpConfigParameters struct {
 
 	// Password for BGP session in plaintext (not a checksum)
 	// +kubebuilder:validation:Optional
-	Md5SecretRef v1.SecretKeySelector `json:"md5SecretRef,omitempty" tf:"-"`
+	Md5SecretRef *v1.SecretKeySelector `json:"md5SecretRef,omitempty" tf:"-"`
 }
 
 type ProjectObservation struct {
@@ -102,7 +102,7 @@ type ProjectStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type Project struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -121,10 +121,10 @@ type ProjectList struct {
 
 // Repository type metadata.
 var (
-	ProjectKind             = "Project"
-	ProjectGroupKind        = schema.GroupKind{Group: Group, Kind: ProjectKind}.String()
-	ProjectKindAPIVersion   = ProjectKind + "." + GroupVersion.String()
-	ProjectGroupVersionKind = GroupVersion.WithKind(ProjectKind)
+	Project_Kind             = "Project"
+	Project_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Project_Kind}.String()
+	Project_KindAPIVersion   = Project_Kind + "." + CRDGroupVersion.String()
+	Project_GroupVersionKind = CRDGroupVersion.WithKind(Project_Kind)
 )
 
 func init() {

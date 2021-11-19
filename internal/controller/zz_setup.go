@@ -35,14 +35,14 @@ import (
 	port "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/metal/port"
 	vlan "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/metal/vlan"
 	vlanattachment "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/port/vlanattachment"
-	apikeyproject "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/project/apikey"
+	apikey "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/project/apikey"
 	project "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/project/project"
 	sshkey "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/project/sshkey"
 	providerconfig "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/providerconfig"
 	ipblock "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/reserved/ipblock"
 	marketrequest "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/spot/marketrequest"
 	key "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/ssh/key"
-	apikey "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/user/apikey"
+	apikeyuser "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/user/apikey"
 	circuit "github.com/crossplane-contrib/provider-tf-equinix-metal/internal/controller/virtual/circuit"
 )
 
@@ -50,25 +50,25 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, l logging.Logger, wl workqueue.RateLimiter, ps terraform.SetupFn, ws *terraform.WorkspaceStore, cfg *tjconfig.Provider, concurrency int) error {
 	for _, setup := range []func(ctrl.Manager, logging.Logger, workqueue.RateLimiter, terraform.SetupFn, *terraform.WorkspaceStore, *tjconfig.Provider, int) error{
-		apikey.Setup,
-		apikeyproject.Setup,
-		attachment.Setup,
-		circuit.Setup,
+		session.Setup,
 		connection.Setup,
 		device.Setup,
-		gateway.Setup,
-		ipblock.Setup,
-		key.Setup,
-		marketrequest.Setup,
 		networktype.Setup,
+		attachment.Setup,
+		gateway.Setup,
 		organization.Setup,
 		port.Setup,
-		project.Setup,
-		providerconfig.Setup,
-		session.Setup,
-		sshkey.Setup,
 		vlan.Setup,
 		vlanattachment.Setup,
+		apikey.Setup,
+		project.Setup,
+		sshkey.Setup,
+		providerconfig.Setup,
+		ipblock.Setup,
+		marketrequest.Setup,
+		key.Setup,
+		apikeyuser.Setup,
+		circuit.Setup,
 	} {
 		if err := setup(mgr, l, wl, ps, ws, cfg, concurrency); err != nil {
 			return err

@@ -65,7 +65,7 @@ type DeviceParameters struct {
 
 	// A string of the desired Custom Data for the device
 	// +kubebuilder:validation:Optional
-	CustomDataSecretRef v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
+	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// Description string for the device
 	// +kubebuilder:validation:Optional
@@ -139,7 +139,7 @@ type DeviceParameters struct {
 
 	// A string of the desired User Data for the device
 	// +kubebuilder:validation:Optional
-	UserDataSecretRef v1.SecretKeySelector `json:"userDataSecretRef,omitempty" tf:"-"`
+	UserDataSecretRef *v1.SecretKeySelector `json:"userDataSecretRef,omitempty" tf:"-"`
 
 	// Only used for devices in reserved hardware. If set, the deletion of this device will block until the hardware reservation is marked provisionable (about 4 minutes in August 2019)
 	// +kubebuilder:validation:Optional
@@ -232,7 +232,7 @@ type DeviceStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type Device struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -251,10 +251,10 @@ type DeviceList struct {
 
 // Repository type metadata.
 var (
-	DeviceKind             = "Device"
-	DeviceGroupKind        = schema.GroupKind{Group: Group, Kind: DeviceKind}.String()
-	DeviceKindAPIVersion   = DeviceKind + "." + GroupVersion.String()
-	DeviceGroupVersionKind = GroupVersion.WithKind(DeviceKind)
+	Device_Kind             = "Device"
+	Device_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Device_Kind}.String()
+	Device_KindAPIVersion   = Device_Kind + "." + CRDGroupVersion.String()
+	Device_GroupVersionKind = CRDGroupVersion.WithKind(Device_Kind)
 )
 
 func init() {

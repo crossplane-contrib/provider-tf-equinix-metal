@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: connections.connection.equinixmetal.tf.crossplane.io
+  name: organizations.metal.equinixmetal.jet.crossplane.io
 spec:
-  group: connection.equinixmetal.tf.crossplane.io
+  group: metal.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: Connection
-    listKind: ConnectionList
-    plural: connections
-    singular: connection
+    - equinixmetaljet
+    kind: Organization
+    listKind: OrganizationList
+    plural: organizations
+    singular: organization
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Connection is the Schema for the Connections API
+        description: Organization is the Schema for the Organizations API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ConnectionSpec defines the desired state of Connection
+            description: OrganizationSpec defines the desired state of Organization
             properties:
               deletionPolicy:
                 default: Delete
@@ -63,89 +63,22 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: Description of the connection resource
+                    description: Description string
                     type: string
-                  facility:
-                    description: Facility where the connection will be created
-                    type: string
-                  metro:
-                    description: Metro where to the connection will be created
-                    type: string
-                  mode:
-                    description: Mode for connections in IBX facilities with the dedicated
-                      type - standard or tunnel
+                  logo:
+                    description: Logo URL
                     type: string
                   name:
-                    description: Name of the connection resource
+                    description: The name of the Organization
                     type: string
-                  organizationId:
-                    description: ID of the organization responsible for the connection
+                  twitter:
+                    description: Twitter handle
                     type: string
-                  organizationIdRef:
-                    description: A Reference to a named object.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                    required:
-                    - name
-                    type: object
-                  organizationIdSelector:
-                    description: A Selector selects an object.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                    type: object
-                  projectId:
-                    description: ID of the project where the connection is scoped
-                      to, only used for type == "shared"
-                    type: string
-                  projectIdRef:
-                    description: A Reference to a named object.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                    required:
-                    - name
-                    type: object
-                  projectIdSelector:
-                    description: A Selector selects an object.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                    type: object
-                  redundancy:
-                    description: Connection redundancy - redundant or primary
-                    type: string
-                  tags:
-                    description: Tags attached to the connection
-                    items:
-                      type: string
-                    type: array
-                  type:
-                    description: Connection type - dedicated or shared
+                  website:
+                    description: Website link
                     type: string
                 required:
                 - name
-                - redundancy
-                - type
                 type: object
               providerConfigRef:
                 default:
@@ -192,38 +125,13 @@ spec:
             - forProvider
             type: object
           status:
-            description: ConnectionStatus defines the observed state of Connection.
+            description: OrganizationStatus defines the observed state of Organization.
             properties:
               atProvider:
                 properties:
-                  ports:
-                    items:
-                      properties:
-                        id:
-                          type: string
-                        linkStatus:
-                          type: string
-                        name:
-                          type: string
-                        role:
-                          type: string
-                        speed:
-                          format: int64
-                          type: integer
-                        status:
-                          type: string
-                        virtualCircuitIds:
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  speed:
-                    format: int64
-                    type: integer
-                  status:
+                  created:
                     type: string
-                  token:
+                  updated:
                     type: string
                 type: object
               conditions:

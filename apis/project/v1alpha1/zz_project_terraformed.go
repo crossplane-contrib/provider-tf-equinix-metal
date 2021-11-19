@@ -30,11 +30,6 @@ func (mg *Project) GetTerraformResourceType() string {
 	return "metal_project"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this Project
-func (tr *Project) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this Project
 func (tr *Project) GetConnectionDetailsMapping() map[string]string {
 	return map[string]string{"bgp_config[*].md5": "spec.forProvider.bgpConfig[*].md5SecretRef"}

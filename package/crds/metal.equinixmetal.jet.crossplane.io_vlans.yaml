@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: gateways.metal.equinixmetal.tf.crossplane.io
+  name: vlans.metal.equinixmetal.jet.crossplane.io
 spec:
-  group: metal.equinixmetal.tf.crossplane.io
+  group: metal.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: Gateway
-    listKind: GatewayList
-    plural: gateways
-    singular: gateway
+    - equinixmetaljet
+    kind: Vlan
+    listKind: VlanList
+    plural: vlans
+    singular: vlan
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Gateway is the Schema for the Gateways API
+        description: Vlan is the Schema for the Vlans API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: GatewaySpec defines the desired state of Gateway
+            description: VlanSpec defines the desired state of Vlan
             properties:
               deletionPolicy:
                 default: Delete
@@ -62,24 +62,23 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  ipReservationId:
-                    description: UUID of the IP Reservation to associate, must be
-                      in the same metro as the VLAN
+                  description:
+                    description: Description string
                     type: string
-                  privateIpv4SubnetSize:
-                    description: Size of the private IPv4 subnet to create for this
-                      gateway, one of [8 16 32 64 128]
+                  facility:
+                    description: Facility where to create the VLAN
+                    type: string
+                  metro:
+                    type: string
+                  projectId:
+                    description: ID of parent project
+                    type: string
+                  vxlan:
+                    description: VLAN ID, must be unique in metro
                     format: int64
                     type: integer
-                  projectId:
-                    description: UUID of the Project where the Gateway is scoped to
-                    type: string
-                  vlanId:
-                    description: UUID of the VLAN to associate
-                    type: string
                 required:
                 - projectId
-                - vlanId
                 type: object
               providerConfigRef:
                 default:
@@ -126,12 +125,9 @@ spec:
             - forProvider
             type: object
           status:
-            description: GatewayStatus defines the observed state of Gateway.
+            description: VlanStatus defines the observed state of Vlan.
             properties:
               atProvider:
-                properties:
-                  state:
-                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

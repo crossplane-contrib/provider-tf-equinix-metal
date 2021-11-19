@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: apikeys.user.equinixmetal.tf.crossplane.io
+  name: gateways.metal.equinixmetal.jet.crossplane.io
 spec:
-  group: user.equinixmetal.tf.crossplane.io
+  group: metal.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: ApiKey
-    listKind: ApiKeyList
-    plural: apikeys
-    singular: apikey
+    - equinixmetaljet
+    kind: Gateway
+    listKind: GatewayList
+    plural: gateways
+    singular: gateway
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ApiKey is the Schema for the ApiKeys API
+        description: Gateway is the Schema for the Gateways API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ApiKeySpec defines the desired state of ApiKey
+            description: GatewaySpec defines the desired state of Gateway
             properties:
               deletionPolicy:
                 default: Delete
@@ -62,15 +62,24 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  description:
-                    description: Description string for the API key
+                  ipReservationId:
+                    description: UUID of the IP Reservation to associate, must be
+                      in the same metro as the VLAN
                     type: string
-                  readOnly:
-                    description: Flag indicating whether the API key shoud be read-only
-                    type: boolean
+                  privateIpv4SubnetSize:
+                    description: Size of the private IPv4 subnet to create for this
+                      gateway, one of [8 16 32 64 128]
+                    format: int64
+                    type: integer
+                  projectId:
+                    description: UUID of the Project where the Gateway is scoped to
+                    type: string
+                  vlanId:
+                    description: UUID of the VLAN to associate
+                    type: string
                 required:
-                - description
-                - readOnly
+                - projectId
+                - vlanId
                 type: object
               providerConfigRef:
                 default:
@@ -117,11 +126,11 @@ spec:
             - forProvider
             type: object
           status:
-            description: ApiKeyStatus defines the observed state of ApiKey.
+            description: GatewayStatus defines the observed state of Gateway.
             properties:
               atProvider:
                 properties:
-                  userId:
+                  state:
                     type: string
                 type: object
               conditions:

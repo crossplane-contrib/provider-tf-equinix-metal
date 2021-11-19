@@ -92,7 +92,7 @@ type PortStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type Port struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -111,10 +111,10 @@ type PortList struct {
 
 // Repository type metadata.
 var (
-	PortKind             = "Port"
-	PortGroupKind        = schema.GroupKind{Group: Group, Kind: PortKind}.String()
-	PortKindAPIVersion   = PortKind + "." + GroupVersion.String()
-	PortGroupVersionKind = GroupVersion.WithKind(PortKind)
+	Port_Kind             = "Port"
+	Port_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Port_Kind}.String()
+	Port_KindAPIVersion   = Port_Kind + "." + CRDGroupVersion.String()
+	Port_GroupVersionKind = CRDGroupVersion.WithKind(Port_Kind)
 )
 
 func init() {

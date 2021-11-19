@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: ipblocks.reserved.equinixmetal.tf.crossplane.io
+  name: sessions.bgp.equinixmetal.jet.crossplane.io
 spec:
-  group: reserved.equinixmetal.tf.crossplane.io
+  group: bgp.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: IpBlock
-    listKind: IpBlockList
-    plural: ipblocks
-    singular: ipblock
+    - equinixmetaljet
+    kind: Session
+    listKind: SessionList
+    plural: sessions
+    singular: session
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: IpBlock is the Schema for the IpBlocks API
+        description: Session is the Schema for the Sessions API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: IpBlockSpec defines the desired state of IpBlock
+            description: SessionSpec defines the desired state of Session
             properties:
               deletionPolicy:
                 default: Delete
@@ -62,40 +62,19 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  description:
-                    description: Arbitrary description
+                  addressFamily:
+                    description: ipv4 or ipv6
                     type: string
-                  facility:
-                    description: Facility where to allocate the public IP address
-                      block, makes sense only for type==public_ipv4, must be empty
-                      for type==global_ipv4, conflicts with metro
-                    type: string
-                  metro:
-                    description: Metro where to allocate the public IP address block,
-                      makes sense only for type==public_ipv4, must be empty for type==global_ipv4,
-                      conflicts with facility
-                    type: string
-                  projectId:
-                    description: The metal project ID where to allocate the address
-                      block
-                    type: string
-                  quantity:
-                    description: The number of allocated /32 addresses, a power of
-                      2
-                    format: int64
-                    type: integer
-                  tags:
-                    description: Tags attached to the reserved block
-                    items:
-                      type: string
-                    type: array
-                  type:
-                    description: Either global_ipv4 or public_ipv4, defaults to public_ipv4
-                      for backward compatibility
+                  defaultRoute:
+                    description: Boolean flag to set the default route policy. False
+                      by default
+                    type: boolean
+                  deviceId:
+                    description: ID of device
                     type: string
                 required:
-                - projectId
-                - quantity
+                - addressFamily
+                - deviceId
                 type: object
               providerConfigRef:
                 default:
@@ -142,34 +121,12 @@ spec:
             - forProvider
             type: object
           status:
-            description: IpBlockStatus defines the observed state of IpBlock.
+            description: SessionStatus defines the observed state of Session.
             properties:
               atProvider:
                 properties:
-                  address:
+                  status:
                     type: string
-                  addressFamily:
-                    format: int64
-                    type: integer
-                  cidr:
-                    format: int64
-                    type: integer
-                  cidrNotation:
-                    type: string
-                  gateway:
-                    type: string
-                  global:
-                    type: boolean
-                  manageable:
-                    type: boolean
-                  management:
-                    type: boolean
-                  netmask:
-                    type: string
-                  network:
-                    type: string
-                  public:
-                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

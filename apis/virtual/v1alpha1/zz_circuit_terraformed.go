@@ -30,11 +30,6 @@ func (mg *Circuit) GetTerraformResourceType() string {
 	return "metal_virtual_circuit"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this Circuit
-func (tr *Circuit) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this Circuit
 func (tr *Circuit) GetConnectionDetailsMapping() map[string]string {
 	return nil

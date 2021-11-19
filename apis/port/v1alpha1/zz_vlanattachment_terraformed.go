@@ -30,11 +30,6 @@ func (mg *VlanAttachment) GetTerraformResourceType() string {
 	return "metal_port_vlan_attachment"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this VlanAttachment
-func (tr *VlanAttachment) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this VlanAttachment
 func (tr *VlanAttachment) GetConnectionDetailsMapping() map[string]string {
 	return nil

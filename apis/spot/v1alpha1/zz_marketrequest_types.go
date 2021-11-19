@@ -132,7 +132,7 @@ type MarketRequestStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type MarketRequest struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -151,10 +151,10 @@ type MarketRequestList struct {
 
 // Repository type metadata.
 var (
-	MarketRequestKind             = "MarketRequest"
-	MarketRequestGroupKind        = schema.GroupKind{Group: Group, Kind: MarketRequestKind}.String()
-	MarketRequestKindAPIVersion   = MarketRequestKind + "." + GroupVersion.String()
-	MarketRequestGroupVersionKind = GroupVersion.WithKind(MarketRequestKind)
+	MarketRequest_Kind             = "MarketRequest"
+	MarketRequest_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: MarketRequest_Kind}.String()
+	MarketRequest_KindAPIVersion   = MarketRequest_Kind + "." + CRDGroupVersion.String()
+	MarketRequest_GroupVersionKind = CRDGroupVersion.WithKind(MarketRequest_Kind)
 )
 
 func init() {

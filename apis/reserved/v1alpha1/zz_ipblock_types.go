@@ -100,7 +100,7 @@ type IpBlockStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type IpBlock struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -119,10 +119,10 @@ type IpBlockList struct {
 
 // Repository type metadata.
 var (
-	IpBlockKind             = "IpBlock"
-	IpBlockGroupKind        = schema.GroupKind{Group: Group, Kind: IpBlockKind}.String()
-	IpBlockKindAPIVersion   = IpBlockKind + "." + GroupVersion.String()
-	IpBlockGroupVersionKind = GroupVersion.WithKind(IpBlockKind)
+	IpBlock_Kind             = "IpBlock"
+	IpBlock_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: IpBlock_Kind}.String()
+	IpBlock_KindAPIVersion   = IpBlock_Kind + "." + CRDGroupVersion.String()
+	IpBlock_GroupVersionKind = CRDGroupVersion.WithKind(IpBlock_Kind)
 )
 
 func init() {

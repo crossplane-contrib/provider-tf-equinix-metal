@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: attachments.ip.equinixmetal.tf.crossplane.io
+  name: ipblocks.reserved.equinixmetal.jet.crossplane.io
 spec:
-  group: ip.equinixmetal.tf.crossplane.io
+  group: reserved.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: Attachment
-    listKind: AttachmentList
-    plural: attachments
-    singular: attachment
+    - equinixmetaljet
+    kind: IpBlock
+    listKind: IpBlockList
+    plural: ipblocks
+    singular: ipblock
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Attachment is the Schema for the Attachments API
+        description: IpBlock is the Schema for the IpBlocks API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: AttachmentSpec defines the desired state of Attachment
+            description: IpBlockSpec defines the desired state of IpBlock
             properties:
               deletionPolicy:
                 default: Delete
@@ -62,13 +62,40 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  cidrNotation:
+                  description:
+                    description: Arbitrary description
                     type: string
-                  deviceId:
+                  facility:
+                    description: Facility where to allocate the public IP address
+                      block, makes sense only for type==public_ipv4, must be empty
+                      for type==global_ipv4, conflicts with metro
+                    type: string
+                  metro:
+                    description: Metro where to allocate the public IP address block,
+                      makes sense only for type==public_ipv4, must be empty for type==global_ipv4,
+                      conflicts with facility
+                    type: string
+                  projectId:
+                    description: The metal project ID where to allocate the address
+                      block
+                    type: string
+                  quantity:
+                    description: The number of allocated /32 addresses, a power of
+                      2
+                    format: int64
+                    type: integer
+                  tags:
+                    description: Tags attached to the reserved block
+                    items:
+                      type: string
+                    type: array
+                  type:
+                    description: Either global_ipv4 or public_ipv4, defaults to public_ipv4
+                      for backward compatibility
                     type: string
                 required:
-                - cidrNotation
-                - deviceId
+                - projectId
+                - quantity
                 type: object
               providerConfigRef:
                 default:
@@ -115,7 +142,7 @@ spec:
             - forProvider
             type: object
           status:
-            description: AttachmentStatus defines the observed state of Attachment.
+            description: IpBlockStatus defines the observed state of IpBlock.
             properties:
               atProvider:
                 properties:
@@ -127,6 +154,8 @@ spec:
                   cidr:
                     format: int64
                     type: integer
+                  cidrNotation:
+                    type: string
                   gateway:
                     type: string
                   global:

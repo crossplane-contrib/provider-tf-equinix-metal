@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: sshkeys.project.equinixmetal.tf.crossplane.io
+  name: circuits.virtual.equinixmetal.jet.crossplane.io
 spec:
-  group: project.equinixmetal.tf.crossplane.io
+  group: virtual.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: SshKey
-    listKind: SshKeyList
-    plural: sshkeys
-    singular: sshkey
+    - equinixmetaljet
+    kind: Circuit
+    listKind: CircuitList
+    plural: circuits
+    singular: circuit
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: SshKey is the Schema for the SshKeys API
+        description: Circuit is the Schema for the Circuits API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: SshKeySpec defines the desired state of SshKey
+            description: CircuitSpec defines the desired state of Circuit
             properties:
               deletionPolicy:
                 default: Delete
@@ -62,19 +62,45 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  connectionId:
+                    description: UUID of Connection where the VC is scoped to
+                    type: string
+                  description:
+                    description: Description of the Virtual Circuit resource
+                    type: string
                   name:
-                    description: The name of the SSH key for identification
+                    description: Name of the Virtual Circuit resource
+                    type: string
+                  nniVlan:
+                    description: Equinix Metal network-to-network VLAN ID (optional
+                      when the connection has mode=tunnel)
+                    format: int64
+                    type: integer
+                  portId:
+                    description: UUID of the Connection Port where the VC is scoped
+                      to
                     type: string
                   projectId:
-                    description: The ID of parent project
+                    description: UUID of the Project where the VC is scoped to
                     type: string
-                  publicKey:
-                    description: The public key. If this is a file, it
+                  speed:
+                    description: Description of the Virtual Circuit speed. This is
+                      for information purposes and is computed when the connection
+                      type is shared.
+                    type: string
+                  tags:
+                    description: Tags attached to the virtual circuit
+                    items:
+                      type: string
+                    type: array
+                  vlanId:
+                    description: UUID of the VLAN to associate
                     type: string
                 required:
-                - name
+                - connectionId
+                - portId
                 - projectId
-                - publicKey
+                - vlanId
                 type: object
               providerConfigRef:
                 default:
@@ -121,18 +147,18 @@ spec:
             - forProvider
             type: object
           status:
-            description: SshKeyStatus defines the observed state of SshKey.
+            description: CircuitStatus defines the observed state of Circuit.
             properties:
               atProvider:
                 properties:
-                  created:
+                  nniVnid:
+                    format: int64
+                    type: integer
+                  status:
                     type: string
-                  fingerprint:
-                    type: string
-                  ownerId:
-                    type: string
-                  updated:
-                    type: string
+                  vnid:
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -66,7 +66,7 @@ type KeyStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type Key struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -85,10 +85,10 @@ type KeyList struct {
 
 // Repository type metadata.
 var (
-	KeyKind             = "Key"
-	KeyGroupKind        = schema.GroupKind{Group: Group, Kind: KeyKind}.String()
-	KeyKindAPIVersion   = KeyKind + "." + GroupVersion.String()
-	KeyGroupVersionKind = GroupVersion.WithKind(KeyKind)
+	Key_Kind             = "Key"
+	Key_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Key_Kind}.String()
+	Key_KindAPIVersion   = Key_Kind + "." + CRDGroupVersion.String()
+	Key_GroupVersionKind = CRDGroupVersion.WithKind(Key_Kind)
 )
 
 func init() {

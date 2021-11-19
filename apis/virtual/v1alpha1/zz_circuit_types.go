@@ -92,7 +92,7 @@ type CircuitStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type Circuit struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -111,10 +111,10 @@ type CircuitList struct {
 
 // Repository type metadata.
 var (
-	CircuitKind             = "Circuit"
-	CircuitGroupKind        = schema.GroupKind{Group: Group, Kind: CircuitKind}.String()
-	CircuitKindAPIVersion   = CircuitKind + "." + GroupVersion.String()
-	CircuitGroupVersionKind = GroupVersion.WithKind(CircuitKind)
+	Circuit_Kind             = "Circuit"
+	Circuit_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Circuit_Kind}.String()
+	Circuit_KindAPIVersion   = Circuit_Kind + "." + CRDGroupVersion.String()
+	Circuit_GroupVersionKind = CRDGroupVersion.WithKind(Circuit_Kind)
 )
 
 func init() {

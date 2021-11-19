@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: organizations.metal.equinixmetal.tf.crossplane.io
+  name: projects.project.equinixmetal.jet.crossplane.io
 spec:
-  group: metal.equinixmetal.tf.crossplane.io
+  group: project.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: Organization
-    listKind: OrganizationList
-    plural: organizations
-    singular: organization
+    - equinixmetaljet
+    kind: Project
+    listKind: ProjectList
+    plural: projects
+    singular: project
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Organization is the Schema for the Organizations API
+        description: Project is the Schema for the Projects API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: OrganizationSpec defines the desired state of Organization
+            description: ProjectSpec defines the desired state of Project
             properties:
               deletionPolicy:
                 default: Delete
@@ -62,20 +62,82 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  description:
-                    description: Description string
-                    type: string
-                  logo:
-                    description: Logo URL
-                    type: string
+                  backendTransfer:
+                    description: Enable or disable [Backend Transfer](https://metal.equinix.com/developers/docs/networking/backend-transfer/),
+                      default is false
+                    type: boolean
+                  bgpConfig:
+                    description: Optional BGP settings. Refer to [Equinix Metal guide
+                      for BGP](https://metal.equinix.com/developers/docs/networking/local-global-bgp/)
+                    items:
+                      properties:
+                        asn:
+                          description: Autonomous System Number for local BGP deployment
+                          format: int64
+                          type: integer
+                        deploymentType:
+                          description: '"local" or "global", the local is likely to
+                            be usable immediately, the global will need to be review
+                            by Equinix Metal engineers'
+                          type: string
+                        md5SecretRef:
+                          description: Password for BGP session in plaintext (not
+                            a checksum)
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - asn
+                      - deploymentType
+                      type: object
+                    type: array
                   name:
-                    description: The name of the Organization
+                    description: The name of the project
                     type: string
-                  twitter:
-                    description: Twitter handle
+                  organizationId:
+                    description: The UUID of organization under which you want to
+                      create the project. If you leave it out, the project will be
+                      create under your the default organization of your account
                     type: string
-                  website:
-                    description: Website link
+                  organizationIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  organizationIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
+                  paymentMethodId:
+                    description: The UUID of payment method for this project. The
+                      payment method and the project need to belong to the same organization
+                      (passed with organization_id, or default)
                     type: string
                 required:
                 - name
@@ -125,7 +187,7 @@ spec:
             - forProvider
             type: object
           status:
-            description: OrganizationStatus defines the observed state of Organization.
+            description: ProjectStatus defines the observed state of Project.
             properties:
               atProvider:
                 properties:

@@ -30,11 +30,6 @@ func (mg *Connection) GetTerraformResourceType() string {
 	return "metal_connection"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this Connection
-func (tr *Connection) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this Connection
 func (tr *Connection) GetConnectionDetailsMapping() map[string]string {
 	return nil

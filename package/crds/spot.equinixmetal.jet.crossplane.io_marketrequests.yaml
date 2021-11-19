@@ -4,14 +4,14 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: marketrequests.spot.equinixmetal.tf.crossplane.io
+  name: marketrequests.spot.equinixmetal.jet.crossplane.io
 spec:
-  group: spot.equinixmetal.tf.crossplane.io
+  group: spot.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
+    - equinixmetaljet
     kind: MarketRequest
     listKind: MarketRequestList
     plural: marketrequests

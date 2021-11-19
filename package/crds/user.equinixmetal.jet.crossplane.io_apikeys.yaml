@@ -4,14 +4,14 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: apikeys.project.equinixmetal.tf.crossplane.io
+  name: apikeys.user.equinixmetal.jet.crossplane.io
 spec:
-  group: project.equinixmetal.tf.crossplane.io
+  group: user.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
+    - equinixmetaljet
     kind: ApiKey
     listKind: ApiKeyList
     plural: apikeys
@@ -65,15 +65,11 @@ spec:
                   description:
                     description: Description string for the API key
                     type: string
-                  projectId:
-                    description: UUID of project which the new API key is scoped to
-                    type: string
                   readOnly:
                     description: Flag indicating whether the API key shoud be read-only
                     type: boolean
                 required:
                 - description
-                - projectId
                 - readOnly
                 type: object
               providerConfigRef:
@@ -124,6 +120,9 @@ spec:
             description: ApiKeyStatus defines the observed state of ApiKey.
             properties:
               atProvider:
+                properties:
+                  userId:
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

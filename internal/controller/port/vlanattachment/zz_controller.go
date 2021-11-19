@@ -39,9 +39,9 @@ import (
 
 // Setup adds a controller that reconciles VlanAttachment managed resources.
 func Setup(mgr ctrl.Manager, l logging.Logger, rl workqueue.RateLimiter, s terraform.SetupFn, ws *terraform.WorkspaceStore, cfg *tjconfig.Provider, concurrency int) error {
-	name := managed.ControllerName(v1alpha1.VlanAttachmentGroupVersionKind.String())
+	name := managed.ControllerName(v1alpha1.VlanAttachment_GroupVersionKind.String())
 	r := managed.NewReconciler(mgr,
-		xpresource.ManagedKind(v1alpha1.VlanAttachmentGroupVersionKind),
+		xpresource.ManagedKind(v1alpha1.VlanAttachment_GroupVersionKind),
 		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), ws, s, cfg.Resources["metal_port_vlan_attachment"])),
 		managed.WithLogger(l.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),

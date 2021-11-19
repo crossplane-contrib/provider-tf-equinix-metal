@@ -60,7 +60,7 @@ type ApiKeyStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type ApiKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -79,10 +79,10 @@ type ApiKeyList struct {
 
 // Repository type metadata.
 var (
-	ApiKeyKind             = "ApiKey"
-	ApiKeyGroupKind        = schema.GroupKind{Group: Group, Kind: ApiKeyKind}.String()
-	ApiKeyKindAPIVersion   = ApiKeyKind + "." + GroupVersion.String()
-	ApiKeyGroupVersionKind = GroupVersion.WithKind(ApiKeyKind)
+	ApiKey_Kind             = "ApiKey"
+	ApiKey_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: ApiKey_Kind}.String()
+	ApiKey_KindAPIVersion   = ApiKey_Kind + "." + CRDGroupVersion.String()
+	ApiKey_GroupVersionKind = CRDGroupVersion.WithKind(ApiKey_Kind)
 )
 
 func init() {

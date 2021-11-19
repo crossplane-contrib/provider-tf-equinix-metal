@@ -30,11 +30,6 @@ func (mg *Port) GetTerraformResourceType() string {
 	return "metal_port"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this Port
-func (tr *Port) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this Port
 func (tr *Port) GetConnectionDetailsMapping() map[string]string {
 	return nil

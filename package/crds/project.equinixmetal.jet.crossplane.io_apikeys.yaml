@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: ports.metal.equinixmetal.tf.crossplane.io
+  name: apikeys.project.equinixmetal.jet.crossplane.io
 spec:
-  group: metal.equinixmetal.tf.crossplane.io
+  group: project.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: Port
-    listKind: PortList
-    plural: ports
-    singular: port
+    - equinixmetaljet
+    kind: ApiKey
+    listKind: ApiKeyList
+    plural: apikeys
+    singular: apikey
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Port is the Schema for the Ports API
+        description: ApiKey is the Schema for the ApiKeys API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: PortSpec defines the desired state of Port
+            description: ApiKeySpec defines the desired state of ApiKey
             properties:
               deletionPolicy:
                 default: Delete
@@ -62,39 +62,19 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  bonded:
-                    description: Flag indicating whether the port should be bonded
-                    type: boolean
-                  layer2:
-                    description: Flag indicating whether the port is in layer2 (or
-                      layer3) mode
-                    type: boolean
-                  nativeVlanId:
-                    description: UUID of native VLAN of the port
+                  description:
+                    description: Description string for the API key
                     type: string
-                  portId:
-                    description: UUID of the port to lookup
+                  projectId:
+                    description: UUID of project which the new API key is scoped to
                     type: string
-                  resetOnDelete:
-                    description: Behavioral setting to reset the port to default settings.
-                      For a bond port it means layer3 without vlans attached, eth
-                      ports will be bonded without native vlan and vlans attached
+                  readOnly:
+                    description: Flag indicating whether the API key shoud be read-only
                     type: boolean
-                  vlanIds:
-                    description: UUIDs VLANs to attach. To avoid jitter, use the UUID
-                      and not the VXLAN
-                    items:
-                      type: string
-                    type: array
-                  vxlanIds:
-                    description: 'VLAN VXLAN ids to attach (example: [1000])'
-                    items:
-                      format: int64
-                      type: integer
-                    type: array
                 required:
-                - bonded
-                - portId
+                - description
+                - projectId
+                - readOnly
                 type: object
               providerConfigRef:
                 default:
@@ -141,24 +121,9 @@ spec:
             - forProvider
             type: object
           status:
-            description: PortStatus defines the observed state of Port.
+            description: ApiKeyStatus defines the observed state of ApiKey.
             properties:
               atProvider:
-                properties:
-                  bondId:
-                    type: string
-                  bondName:
-                    type: string
-                  disbondSupported:
-                    type: boolean
-                  mac:
-                    type: string
-                  name:
-                    type: string
-                  networkType:
-                    type: string
-                  type:
-                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

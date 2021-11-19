@@ -30,11 +30,6 @@ func (mg *Gateway) GetTerraformResourceType() string {
 	return "metal_gateway"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this Gateway
-func (tr *Gateway) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this Gateway
 func (tr *Gateway) GetConnectionDetailsMapping() map[string]string {
 	return nil

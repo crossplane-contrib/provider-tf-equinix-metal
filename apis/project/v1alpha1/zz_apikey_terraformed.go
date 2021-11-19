@@ -30,11 +30,6 @@ func (mg *ApiKey) GetTerraformResourceType() string {
 	return "metal_project_api_key"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this ApiKey
-func (tr *ApiKey) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this ApiKey
 func (tr *ApiKey) GetConnectionDetailsMapping() map[string]string {
 	return map[string]string{"token": "status.atProvider.token"}

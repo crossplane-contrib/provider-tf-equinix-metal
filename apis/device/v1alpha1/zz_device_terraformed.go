@@ -30,11 +30,6 @@ func (mg *Device) GetTerraformResourceType() string {
 	return "metal_device"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this Device
-func (tr *Device) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this Device
 func (tr *Device) GetConnectionDetailsMapping() map[string]string {
 	return map[string]string{"custom_data": "spec.forProvider.customDataSecretRef", "root_password": "status.atProvider.rootPassword", "user_data": "spec.forProvider.userDataSecretRef"}
