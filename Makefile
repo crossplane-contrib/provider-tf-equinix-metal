@@ -41,6 +41,8 @@ GO_SUBDIRS += cmd internal apis
 GO111MODULE = on
 -include build/makelib/golang.mk
 
+PATH := $(TOOLS_HOST_DIR)/:${PATH}
+
 # ====================================================================================
 # Setup Kubernetes tools
 
@@ -79,6 +81,10 @@ crds.clean:
 	@find package/crds -name '*.yaml' -exec sed -i.sed -e '1,2d' {} \; || $(FAIL)
 	@find package/crds -name '*.yaml.sed' -delete || $(FAIL)
 	@$(OK) cleaned generated CRDs
+
+
+generate.init: $(GOIMPORTS)
+	$(MAKE) -f build/makelib/common.mk $@
 
 generate.done: crds.clean
 
