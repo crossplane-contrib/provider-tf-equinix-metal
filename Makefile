@@ -4,7 +4,7 @@
 PROJECT_NAME := provider-tf-equinix-metal
 PROJECT_REPO := github.com/crossplane-contrib/$(PROJECT_NAME)
 
-export TERRAFORM_VERSION := 1.0.5
+export TERRAFORM_VERSION := 1.0.11
 export TERRAFORM_PROVIDER_SOURCE := equinix/metal
 export TERRAFORM_PROVIDER_VERSION := 3.2.0
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-metal
@@ -80,20 +80,7 @@ crds.clean:
 	@find package/crds -name '*.yaml.sed' -delete || $(FAIL)
 	@$(OK) cleaned generated CRDs
 
-terrajet.run: $(GOIMPORTS)
-	@PATH=$(TOOLS_HOST_DIR)/:${PATH} go run cmd/generator/main.go
-
-generate.init: terrajet.run
 generate.done: crds.clean
-
-# todo(turkenh): clean up whole apis and internal/control directories once we
-# figured out where to keep non generated files inside there dirs
-terrajet.clean:
-	@rm -f apis/zz_*.go
-	@rm -f apis/*/zz_*.go
-	@rm -f apis/*/*/zz_*.go
-	@rm -f internal/controller/zz_*.go
-	@rm -f internal/controller/*/*/zz_*.go
 
 # Update the submodules, such as the common build scripts.
 submodules:
