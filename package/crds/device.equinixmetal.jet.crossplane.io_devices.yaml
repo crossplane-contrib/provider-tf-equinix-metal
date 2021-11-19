@@ -4,14 +4,14 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: devices.device.equinixmetal.tf.crossplane.io
+  name: devices.device.equinixmetal.jet.crossplane.io
 spec:
-  group: device.equinixmetal.tf.crossplane.io
+  group: device.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
+    - equinixmetaljet
     kind: Device
     listKind: DeviceList
     plural: devices

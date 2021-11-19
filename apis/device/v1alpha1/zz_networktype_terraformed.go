@@ -30,11 +30,6 @@ func (mg *NetworkType) GetTerraformResourceType() string {
 	return "metal_device_network_type"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this NetworkType
-func (tr *NetworkType) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this NetworkType
 func (tr *NetworkType) GetConnectionDetailsMapping() map[string]string {
 	return nil

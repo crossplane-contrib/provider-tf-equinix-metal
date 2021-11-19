@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: networktypes.device.equinixmetal.tf.crossplane.io
+  name: vlanattachments.port.equinixmetal.jet.crossplane.io
 spec:
-  group: device.equinixmetal.tf.crossplane.io
+  group: port.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: NetworkType
-    listKind: NetworkTypeList
-    plural: networktypes
-    singular: networktype
+    - equinixmetaljet
+    kind: VlanAttachment
+    listKind: VlanAttachmentList
+    plural: vlanattachments
+    singular: vlanattachment
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: NetworkType is the Schema for the NetworkTypes API
+        description: VlanAttachment is the Schema for the VlanAttachments API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: NetworkTypeSpec defines the desired state of NetworkType
+            description: VlanAttachmentSpec defines the desired state of VlanAttachment
             properties:
               deletionPolicy:
                 default: Delete
@@ -63,16 +63,30 @@ spec:
               forProvider:
                 properties:
                   deviceId:
-                    description: The ID of the device on which the network type should
-                      be set
+                    description: ID of device to be assigned to the VLAN
                     type: string
-                  type:
-                    description: Network type to set. Must be one of layer3, hybrid,
-                      hybrid-bonded, layer2-individual, layer2-bonded
+                  forceBond:
+                    description: Add port back to the bond when this resource is removed.
+                      Default is false
+                    type: boolean
+                  native:
+                    description: Mark this VLAN a native VLAN on the port. This can
+                      be used only if this assignment assigns second or further VLAN
+                      to the port. To ensure that this attachment is not first on
+                      a port, you can use depends_on pointing to another metal_port_vlan_attachment,
+                      just like in the layer2-individual example above
+                    type: boolean
+                  portName:
+                    description: Name of network port to be assigned to the VLAN
                     type: string
+                  vlanVnid:
+                    description: VXLAN Network Identifier, integer
+                    format: int64
+                    type: integer
                 required:
                 - deviceId
-                - type
+                - portName
+                - vlanVnid
                 type: object
               providerConfigRef:
                 default:
@@ -119,9 +133,14 @@ spec:
             - forProvider
             type: object
           status:
-            description: NetworkTypeStatus defines the observed state of NetworkType.
+            description: VlanAttachmentStatus defines the observed state of VlanAttachment.
             properties:
               atProvider:
+                properties:
+                  portId:
+                    type: string
+                  vlanId:
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

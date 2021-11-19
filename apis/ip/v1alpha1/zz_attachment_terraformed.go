@@ -30,11 +30,6 @@ func (mg *Attachment) GetTerraformResourceType() string {
 	return "metal_ip_attachment"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this Attachment
-func (tr *Attachment) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this Attachment
 func (tr *Attachment) GetConnectionDetailsMapping() map[string]string {
 	return nil

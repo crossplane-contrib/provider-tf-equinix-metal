@@ -64,7 +64,7 @@ type SessionStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type Session struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -83,10 +83,10 @@ type SessionList struct {
 
 // Repository type metadata.
 var (
-	SessionKind             = "Session"
-	SessionGroupKind        = schema.GroupKind{Group: Group, Kind: SessionKind}.String()
-	SessionKindAPIVersion   = SessionKind + "." + GroupVersion.String()
-	SessionGroupVersionKind = GroupVersion.WithKind(SessionKind)
+	Session_Kind             = "Session"
+	Session_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Session_Kind}.String()
+	Session_KindAPIVersion   = Session_Kind + "." + CRDGroupVersion.String()
+	Session_GroupVersionKind = CRDGroupVersion.WithKind(Session_Kind)
 )
 
 func init() {

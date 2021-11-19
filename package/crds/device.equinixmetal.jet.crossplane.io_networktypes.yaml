@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: vlans.metal.equinixmetal.tf.crossplane.io
+  name: networktypes.device.equinixmetal.jet.crossplane.io
 spec:
-  group: metal.equinixmetal.tf.crossplane.io
+  group: device.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: Vlan
-    listKind: VlanList
-    plural: vlans
-    singular: vlan
+    - equinixmetaljet
+    kind: NetworkType
+    listKind: NetworkTypeList
+    plural: networktypes
+    singular: networktype
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Vlan is the Schema for the Vlans API
+        description: NetworkType is the Schema for the NetworkTypes API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: VlanSpec defines the desired state of Vlan
+            description: NetworkTypeSpec defines the desired state of NetworkType
             properties:
               deletionPolicy:
                 default: Delete
@@ -62,23 +62,17 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  description:
-                    description: Description string
+                  deviceId:
+                    description: The ID of the device on which the network type should
+                      be set
                     type: string
-                  facility:
-                    description: Facility where to create the VLAN
+                  type:
+                    description: Network type to set. Must be one of layer3, hybrid,
+                      hybrid-bonded, layer2-individual, layer2-bonded
                     type: string
-                  metro:
-                    type: string
-                  projectId:
-                    description: ID of parent project
-                    type: string
-                  vxlan:
-                    description: VLAN ID, must be unique in metro
-                    format: int64
-                    type: integer
                 required:
-                - projectId
+                - deviceId
+                - type
                 type: object
               providerConfigRef:
                 default:
@@ -125,7 +119,7 @@ spec:
             - forProvider
             type: object
           status:
-            description: VlanStatus defines the observed state of Vlan.
+            description: NetworkTypeStatus defines the observed state of NetworkType.
             properties:
               atProvider:
                 type: object

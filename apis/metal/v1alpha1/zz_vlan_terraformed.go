@@ -30,11 +30,6 @@ func (mg *Vlan) GetTerraformResourceType() string {
 	return "metal_vlan"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this Vlan
-func (tr *Vlan) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this Vlan
 func (tr *Vlan) GetConnectionDetailsMapping() map[string]string {
 	return nil

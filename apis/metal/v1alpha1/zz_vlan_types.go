@@ -70,7 +70,7 @@ type VlanStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type Vlan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -89,10 +89,10 @@ type VlanList struct {
 
 // Repository type metadata.
 var (
-	VlanKind             = "Vlan"
-	VlanGroupKind        = schema.GroupKind{Group: Group, Kind: VlanKind}.String()
-	VlanKindAPIVersion   = VlanKind + "." + GroupVersion.String()
-	VlanGroupVersionKind = GroupVersion.WithKind(VlanKind)
+	Vlan_Kind             = "Vlan"
+	Vlan_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Vlan_Kind}.String()
+	Vlan_KindAPIVersion   = Vlan_Kind + "." + CRDGroupVersion.String()
+	Vlan_GroupVersionKind = CRDGroupVersion.WithKind(Vlan_Kind)
 )
 
 func init() {

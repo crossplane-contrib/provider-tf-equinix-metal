@@ -74,7 +74,7 @@ type VlanAttachmentStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type VlanAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -93,10 +93,10 @@ type VlanAttachmentList struct {
 
 // Repository type metadata.
 var (
-	VlanAttachmentKind             = "VlanAttachment"
-	VlanAttachmentGroupKind        = schema.GroupKind{Group: Group, Kind: VlanAttachmentKind}.String()
-	VlanAttachmentKindAPIVersion   = VlanAttachmentKind + "." + GroupVersion.String()
-	VlanAttachmentGroupVersionKind = GroupVersion.WithKind(VlanAttachmentKind)
+	VlanAttachment_Kind             = "VlanAttachment"
+	VlanAttachment_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: VlanAttachment_Kind}.String()
+	VlanAttachment_KindAPIVersion   = VlanAttachment_Kind + "." + CRDGroupVersion.String()
+	VlanAttachment_GroupVersionKind = CRDGroupVersion.WithKind(VlanAttachment_Kind)
 )
 
 func init() {

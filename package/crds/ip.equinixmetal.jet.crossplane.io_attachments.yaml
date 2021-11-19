@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: keys.ssh.equinixmetal.tf.crossplane.io
+  name: attachments.ip.equinixmetal.jet.crossplane.io
 spec:
-  group: ssh.equinixmetal.tf.crossplane.io
+  group: ip.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: Key
-    listKind: KeyList
-    plural: keys
-    singular: key
+    - equinixmetaljet
+    kind: Attachment
+    listKind: AttachmentList
+    plural: attachments
+    singular: attachment
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Key is the Schema for the Keys API
+        description: Attachment is the Schema for the Attachments API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: KeySpec defines the desired state of Key
+            description: AttachmentSpec defines the desired state of Attachment
             properties:
               deletionPolicy:
                 default: Delete
@@ -62,15 +62,13 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  name:
-                    description: The name of the SSH key for identification
+                  cidrNotation:
                     type: string
-                  publicKey:
-                    description: The public key. If this is a file, it
+                  deviceId:
                     type: string
                 required:
-                - name
-                - publicKey
+                - cidrNotation
+                - deviceId
                 type: object
               providerConfigRef:
                 default:
@@ -117,18 +115,32 @@ spec:
             - forProvider
             type: object
           status:
-            description: KeyStatus defines the observed state of Key.
+            description: AttachmentStatus defines the observed state of Attachment.
             properties:
               atProvider:
                 properties:
-                  created:
+                  address:
                     type: string
-                  fingerprint:
+                  addressFamily:
+                    format: int64
+                    type: integer
+                  cidr:
+                    format: int64
+                    type: integer
+                  gateway:
                     type: string
-                  ownerId:
+                  global:
+                    type: boolean
+                  manageable:
+                    type: boolean
+                  management:
+                    type: boolean
+                  netmask:
                     type: string
-                  updated:
+                  network:
                     type: string
+                  public:
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

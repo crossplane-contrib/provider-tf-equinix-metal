@@ -74,7 +74,7 @@ type OrganizationStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type Organization struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -93,10 +93,10 @@ type OrganizationList struct {
 
 // Repository type metadata.
 var (
-	OrganizationKind             = "Organization"
-	OrganizationGroupKind        = schema.GroupKind{Group: Group, Kind: OrganizationKind}.String()
-	OrganizationKindAPIVersion   = OrganizationKind + "." + GroupVersion.String()
-	OrganizationGroupVersionKind = GroupVersion.WithKind(OrganizationKind)
+	Organization_Kind             = "Organization"
+	Organization_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Organization_Kind}.String()
+	Organization_KindAPIVersion   = Organization_Kind + "." + CRDGroupVersion.String()
+	Organization_GroupVersionKind = CRDGroupVersion.WithKind(Organization_Kind)
 )
 
 func init() {

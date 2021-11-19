@@ -188,7 +188,11 @@ func (in *DeviceParameters) DeepCopyInto(out *DeviceParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	out.CustomDataSecretRef = in.CustomDataSecretRef
+	if in.CustomDataSecretRef != nil {
+		in, out := &in.CustomDataSecretRef, &out.CustomDataSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -301,7 +305,11 @@ func (in *DeviceParameters) DeepCopyInto(out *DeviceParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	out.UserDataSecretRef = in.UserDataSecretRef
+	if in.UserDataSecretRef != nil {
+		in, out := &in.UserDataSecretRef, &out.UserDataSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.WaitForReservationDeprovision != nil {
 		in, out := &in.WaitForReservationDeprovision, &out.WaitForReservationDeprovision
 		*out = new(bool)

@@ -39,9 +39,9 @@ import (
 
 // Setup adds a controller that reconciles Connection managed resources.
 func Setup(mgr ctrl.Manager, l logging.Logger, rl workqueue.RateLimiter, s terraform.SetupFn, ws *terraform.WorkspaceStore, cfg *tjconfig.Provider, concurrency int) error {
-	name := managed.ControllerName(v1alpha1.ConnectionGroupVersionKind.String())
+	name := managed.ControllerName(v1alpha1.Connection_GroupVersionKind.String())
 	r := managed.NewReconciler(mgr,
-		xpresource.ManagedKind(v1alpha1.ConnectionGroupVersionKind),
+		xpresource.ManagedKind(v1alpha1.Connection_GroupVersionKind),
 		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), ws, s, cfg.Resources["metal_connection"])),
 		managed.WithLogger(l.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),

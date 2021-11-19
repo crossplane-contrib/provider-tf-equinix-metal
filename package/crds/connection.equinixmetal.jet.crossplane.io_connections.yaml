@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: circuits.virtual.equinixmetal.tf.crossplane.io
+  name: connections.connection.equinixmetal.jet.crossplane.io
 spec:
-  group: virtual.equinixmetal.tf.crossplane.io
+  group: connection.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: Circuit
-    listKind: CircuitList
-    plural: circuits
-    singular: circuit
+    - equinixmetaljet
+    kind: Connection
+    listKind: ConnectionList
+    plural: connections
+    singular: connection
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Circuit is the Schema for the Circuits API
+        description: Connection is the Schema for the Connections API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: CircuitSpec defines the desired state of Circuit
+            description: ConnectionSpec defines the desired state of Connection
             properties:
               deletionPolicy:
                 default: Delete
@@ -62,45 +62,90 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  connectionId:
-                    description: UUID of Connection where the VC is scoped to
-                    type: string
                   description:
-                    description: Description of the Virtual Circuit resource
+                    description: Description of the connection resource
+                    type: string
+                  facility:
+                    description: Facility where the connection will be created
+                    type: string
+                  metro:
+                    description: Metro where to the connection will be created
+                    type: string
+                  mode:
+                    description: Mode for connections in IBX facilities with the dedicated
+                      type - standard or tunnel
                     type: string
                   name:
-                    description: Name of the Virtual Circuit resource
+                    description: Name of the connection resource
                     type: string
-                  nniVlan:
-                    description: Equinix Metal network-to-network VLAN ID (optional
-                      when the connection has mode=tunnel)
-                    format: int64
-                    type: integer
-                  portId:
-                    description: UUID of the Connection Port where the VC is scoped
-                      to
+                  organizationId:
+                    description: ID of the organization responsible for the connection
                     type: string
+                  organizationIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  organizationIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
                   projectId:
-                    description: UUID of the Project where the VC is scoped to
+                    description: ID of the project where the connection is scoped
+                      to, only used for type == "shared"
                     type: string
-                  speed:
-                    description: Description of the Virtual Circuit speed. This is
-                      for information purposes and is computed when the connection
-                      type is shared.
+                  projectIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  projectIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
+                  redundancy:
+                    description: Connection redundancy - redundant or primary
                     type: string
                   tags:
-                    description: Tags attached to the virtual circuit
+                    description: Tags attached to the connection
                     items:
                       type: string
                     type: array
-                  vlanId:
-                    description: UUID of the VLAN to associate
+                  type:
+                    description: Connection type - dedicated or shared
                     type: string
                 required:
-                - connectionId
-                - portId
-                - projectId
-                - vlanId
+                - name
+                - redundancy
+                - type
                 type: object
               providerConfigRef:
                 default:
@@ -147,18 +192,39 @@ spec:
             - forProvider
             type: object
           status:
-            description: CircuitStatus defines the observed state of Circuit.
+            description: ConnectionStatus defines the observed state of Connection.
             properties:
               atProvider:
                 properties:
-                  nniVnid:
+                  ports:
+                    items:
+                      properties:
+                        id:
+                          type: string
+                        linkStatus:
+                          type: string
+                        name:
+                          type: string
+                        role:
+                          type: string
+                        speed:
+                          format: int64
+                          type: integer
+                        status:
+                          type: string
+                        virtualCircuitIds:
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  speed:
                     format: int64
                     type: integer
                   status:
                     type: string
-                  vnid:
-                    format: int64
-                    type: integer
+                  token:
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

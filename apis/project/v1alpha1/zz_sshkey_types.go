@@ -70,7 +70,7 @@ type SshKeyStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type SshKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -89,10 +89,10 @@ type SshKeyList struct {
 
 // Repository type metadata.
 var (
-	SshKeyKind             = "SshKey"
-	SshKeyGroupKind        = schema.GroupKind{Group: Group, Kind: SshKeyKind}.String()
-	SshKeyKindAPIVersion   = SshKeyKind + "." + GroupVersion.String()
-	SshKeyGroupVersionKind = GroupVersion.WithKind(SshKeyKind)
+	SshKey_Kind             = "SshKey"
+	SshKey_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: SshKey_Kind}.String()
+	SshKey_KindAPIVersion   = SshKey_Kind + "." + CRDGroupVersion.String()
+	SshKey_GroupVersionKind = CRDGroupVersion.WithKind(SshKey_Kind)
 )
 
 func init() {

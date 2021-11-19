@@ -30,11 +30,6 @@ func (mg *SshKey) GetTerraformResourceType() string {
 	return "metal_project_ssh_key"
 }
 
-// GetTerraformResourceIDField returns Terraform identifier field for this SshKey
-func (tr *SshKey) GetTerraformResourceIDField() string {
-	return "id"
-}
-
 // GetConnectionDetailsMapping for this SshKey
 func (tr *SshKey) GetConnectionDetailsMapping() map[string]string {
 	return nil

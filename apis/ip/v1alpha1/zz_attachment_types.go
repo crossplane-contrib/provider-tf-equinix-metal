@@ -76,7 +76,7 @@ type AttachmentStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type Attachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -95,10 +95,10 @@ type AttachmentList struct {
 
 // Repository type metadata.
 var (
-	AttachmentKind             = "Attachment"
-	AttachmentGroupKind        = schema.GroupKind{Group: Group, Kind: AttachmentKind}.String()
-	AttachmentKindAPIVersion   = AttachmentKind + "." + GroupVersion.String()
-	AttachmentGroupVersionKind = GroupVersion.WithKind(AttachmentKind)
+	Attachment_Kind             = "Attachment"
+	Attachment_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Attachment_Kind}.String()
+	Attachment_KindAPIVersion   = Attachment_Kind + "." + CRDGroupVersion.String()
+	Attachment_GroupVersionKind = CRDGroupVersion.WithKind(Attachment_Kind)
 )
 
 func init() {

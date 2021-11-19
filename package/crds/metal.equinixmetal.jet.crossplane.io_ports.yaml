@@ -4,18 +4,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: projects.project.equinixmetal.tf.crossplane.io
+  name: ports.metal.equinixmetal.jet.crossplane.io
 spec:
-  group: project.equinixmetal.tf.crossplane.io
+  group: metal.equinixmetal.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - tfequinixmetal
-    kind: Project
-    listKind: ProjectList
-    plural: projects
-    singular: project
+    - equinixmetaljet
+    kind: Port
+    listKind: PortList
+    plural: ports
+    singular: port
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Project is the Schema for the Projects API
+        description: Port is the Schema for the Ports API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ProjectSpec defines the desired state of Project
+            description: PortSpec defines the desired state of Port
             properties:
               deletionPolicy:
                 default: Delete
@@ -62,85 +62,39 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  backendTransfer:
-                    description: Enable or disable [Backend Transfer](https://metal.equinix.com/developers/docs/networking/backend-transfer/),
-                      default is false
+                  bonded:
+                    description: Flag indicating whether the port should be bonded
                     type: boolean
-                  bgpConfig:
-                    description: Optional BGP settings. Refer to [Equinix Metal guide
-                      for BGP](https://metal.equinix.com/developers/docs/networking/local-global-bgp/)
+                  layer2:
+                    description: Flag indicating whether the port is in layer2 (or
+                      layer3) mode
+                    type: boolean
+                  nativeVlanId:
+                    description: UUID of native VLAN of the port
+                    type: string
+                  portId:
+                    description: UUID of the port to lookup
+                    type: string
+                  resetOnDelete:
+                    description: Behavioral setting to reset the port to default settings.
+                      For a bond port it means layer3 without vlans attached, eth
+                      ports will be bonded without native vlan and vlans attached
+                    type: boolean
+                  vlanIds:
+                    description: UUIDs VLANs to attach. To avoid jitter, use the UUID
+                      and not the VXLAN
                     items:
-                      properties:
-                        asn:
-                          description: Autonomous System Number for local BGP deployment
-                          format: int64
-                          type: integer
-                        deploymentType:
-                          description: '"local" or "global", the local is likely to
-                            be usable immediately, the global will need to be review
-                            by Equinix Metal engineers'
-                          type: string
-                        md5SecretRef:
-                          description: Password for BGP session in plaintext (not
-                            a checksum)
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
-                      required:
-                      - asn
-                      - deploymentType
-                      type: object
+                      type: string
                     type: array
-                  name:
-                    description: The name of the project
-                    type: string
-                  organizationId:
-                    description: The UUID of organization under which you want to
-                      create the project. If you leave it out, the project will be
-                      create under your the default organization of your account
-                    type: string
-                  organizationIdRef:
-                    description: A Reference to a named object.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                    required:
-                    - name
-                    type: object
-                  organizationIdSelector:
-                    description: A Selector selects an object.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                    type: object
-                  paymentMethodId:
-                    description: The UUID of payment method for this project. The
-                      payment method and the project need to belong to the same organization
-                      (passed with organization_id, or default)
-                    type: string
+                  vxlanIds:
+                    description: 'VLAN VXLAN ids to attach (example: [1000])'
+                    items:
+                      format: int64
+                      type: integer
+                    type: array
                 required:
-                - name
+                - bonded
+                - portId
                 type: object
               providerConfigRef:
                 default:
@@ -187,13 +141,23 @@ spec:
             - forProvider
             type: object
           status:
-            description: ProjectStatus defines the observed state of Project.
+            description: PortStatus defines the observed state of Port.
             properties:
               atProvider:
                 properties:
-                  created:
+                  bondId:
                     type: string
-                  updated:
+                  bondName:
+                    type: string
+                  disbondSupported:
+                    type: boolean
+                  mac:
+                    type: string
+                  name:
+                    type: string
+                  networkType:
+                    type: string
+                  type:
                     type: string
                 type: object
               conditions:

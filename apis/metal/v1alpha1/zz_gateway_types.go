@@ -68,7 +68,7 @@ type GatewayStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,tfequinixmetal}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,equinixmetaljet}
 type Gateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -87,10 +87,10 @@ type GatewayList struct {
 
 // Repository type metadata.
 var (
-	GatewayKind             = "Gateway"
-	GatewayGroupKind        = schema.GroupKind{Group: Group, Kind: GatewayKind}.String()
-	GatewayKindAPIVersion   = GatewayKind + "." + GroupVersion.String()
-	GatewayGroupVersionKind = GroupVersion.WithKind(GatewayKind)
+	Gateway_Kind             = "Gateway"
+	Gateway_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Gateway_Kind}.String()
+	Gateway_KindAPIVersion   = Gateway_Kind + "." + CRDGroupVersion.String()
+	Gateway_GroupVersionKind = CRDGroupVersion.WithKind(Gateway_Kind)
 )
 
 func init() {
