@@ -31,9 +31,9 @@ import (
 )
 
 const (
-	keyAuthToken             = "auth_token"
-	keyMaxRetries            = "max_retries"
-	keyMaxRetriesWaitSeconds = "max_retries_wait_seconds"
+	keyAuthToken           = "auth_token"
+	keyMaxRetries          = "max_retries"
+	keyMaxRetryWaitSeconds = "max_retry_wait_seconds"
 
 	// EquinixMetal credentials environment variable names
 	envAuthToken = "METAL_AUTH_TOKEN"
@@ -86,9 +86,14 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		}
 
 		// set provider configuration
-		ps.Configuration = map[string]interface{}{
-			keyMaxRetries:            equinixmetalCreds[keyMaxRetries],
-			keyMaxRetriesWaitSeconds: equinixmetalCreds[keyMaxRetriesWaitSeconds],
+		ps.Configuration = map[string]interface{}{}
+
+		// TODO(displague) Can optional configuration be handled better?
+		if equinixmetalCreds[keyMaxRetries] != "" {
+			ps.Configuration[keyMaxRetries] = equinixmetalCreds[keyMaxRetries]
+		}
+		if equinixmetalCreds[keyMaxRetryWaitSeconds] != "" {
+			ps.Configuration[keyMaxRetryWaitSeconds] = equinixmetalCreds[keyMaxRetryWaitSeconds]
 		}
 		// set environment variables for sensitive provider configuration
 		ps.Env = []string{
