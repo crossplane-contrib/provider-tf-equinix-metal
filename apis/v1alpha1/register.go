@@ -25,7 +25,7 @@ import (
 
 // Package type metadata.
 const (
-	Group   = "equinixmetal.tf.crossplane.io"
+	Group   = "equinixmetal.jet.crossplane.io"
 	Version = "v1alpha1"
 )
 

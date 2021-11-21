@@ -16,6 +16,6 @@ limitations under the License.
 
 // Package v1alpha1 contains the core resources of the tf equinixmetal provider.
 // +kubebuilder:object:generate=true
-// +groupName=equinixmetal.tf.crossplane.io
+// +groupName=equinixmetal.jet.crossplane.io
 // +versionName=v1alpha1
 package v1alpha1
