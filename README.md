@@ -10,7 +10,7 @@ EquinixMetal API.
 Install the provider by using the following command after changing the image tag
 to the [latest release](https://github.com/crossplane-contrib/provider-tf-equinix-metal/releases):
 ```
-kubectl crossplane install provider crossplane/provider-tf-equinix-metal:v0.1.0
+kubectl crossplane install provider crossplane/provider-tf-equinix-metal:v0.2.2
 ```
 
 You can see the API reference [here](https://doc.crds.dev/github.com/crossplane-contrib/provider-tf-equinix-metal).
