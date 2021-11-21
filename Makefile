@@ -73,7 +73,7 @@ fallthrough: submodules
 # - generated file
 cobertura:
 	@cat $(GO_TEST_OUTPUT)/coverage.txt | \
-		grep -v zz_generated.deepcopy | \
+		grep -v zz_ | \
 		$(GOCOVER_COBERTURA) > $(GO_TEST_OUTPUT)/cobertura-coverage.xml
 
 crds.clean:
@@ -83,8 +83,8 @@ crds.clean:
 	@$(OK) cleaned generated CRDs
 
 
-generate.init: $(GOIMPORTS)
-	$(MAKE) -f build/makelib/common.mk $@
+#generate.init: $(GOIMPORTS)
+#	$(MAKE) -f build/makelib/common.mk $@
 
 generate.done: crds.clean
 
