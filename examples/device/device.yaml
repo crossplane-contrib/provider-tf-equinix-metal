@@ -4,12 +4,11 @@ spec:
   forProvider:
     projectIdRef:
       name: hello-crossplane
+    metro: da
     hostname: terrajet-example
     plan: c3.small.x86
     operatingSystem: ubuntu_20_04
     billingCycle: hourly
-    locked: false
-    networkType: hybrid
     tags:
     - crossplane
   providerConfigRef:
