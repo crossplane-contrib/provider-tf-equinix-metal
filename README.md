@@ -1,5 +1,8 @@
 # Terrajet EquinixMetal Provider
 
+> [!WARNING]
+> **Deprecated** Use <https://github.com/crossplane-contrib/provider-jet-equinix> instead.
+
 `provider-tf-equinix-metal` is a [Crossplane](https://crossplane.io/) provider that
 is built using [Terrajet](https://github.com/crossplane-contrib/terrajet) code
 generation tools and exposes XRM-conformant managed resources for the 
